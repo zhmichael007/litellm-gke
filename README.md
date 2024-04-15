@@ -14,8 +14,8 @@ Edit config.yaml
 3. modify the model list
 
 ## Create LiteLLM Proxy Cluster in GKE
-```
 modify these parameters in deploy.sh:
+```
 PROJECT_ID=
 CLUSTER_NAME=litellm-proxy
 REGION=us-central1
