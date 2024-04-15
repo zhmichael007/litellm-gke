@@ -34,8 +34,10 @@ bash deploy.sh
 ```
 
 ## Deploy the Deployment and Service of LiteLLM Proxy Cluster
+If you need IP whitelist, modify the loadBalancerSourceRanges in service.yaml
 ```
 kubectl create configmap litellm-config-file --from-file=path/config.yaml
+kubectl apply -f deployment.yaml
 kubectl apply -f service.yaml
 ```
 
@@ -56,7 +58,7 @@ curl --location 'http://<YOUR_SERVICE_IP>:80/completions' \
 ```
 sample result:
 ```
-{"id":"chatcmpl-abf4eb0b-b275-47f8-8e36-b0649c43c346","choices":[{"finish_reason":"stop","index":0,"message":{"content":"I am Gemini, a multi-modal AI model, developed by Google.","role":"assistant"}}],"created":1713067892,"model":"gemini-1.0-pro-001","object":"chat.completion","system_fingerprint":null,"usage":{"prompt_tokens":5,"completion_tokens":15,"total_tokens":20}}
+{"id":"chatcmpl-34486f4e-cb0d-4502-8fb1-6562e59de8d0","object":"text_completion","created":1713180465,"model":"gemini-1.0-pro-002","choices":[{"finish_reason":"stop","index":0,"text":"Hello World! 👋 \n\nIt's nice to meet you. What would you like to talk about today?","logprobs":null}],"usage":{"prompt_tokens":3,"completion_tokens":23,"total_tokens":26}}
 ```
 
 ## Update your config.yaml file
@@ -67,13 +69,6 @@ kubectl create configmap litellm-config-file --from-file=path/config.yaml
 ```
 2. Reload the GKE
 ```
-kubectl delete -f service.yaml
-kubectl apply -f service.yaml
-```
-
-## Clean
-```
-export PROJECT_ID=your_project_id
-export REGION=region_name
-bash clean.sh
+kubectl delete -f deployment.yaml
+kubectl apply -f deployment.yaml
 ```
