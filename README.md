@@ -11,6 +11,7 @@ This repo helps to deploy [LiteLLM](https://github.com/BerriAI/litellm) on GKE w
 Edit config.yaml
 1. modify "vertex_project" and "vertex_location"
 2. modify "master_key"
+3. modify the model list
 
 ## Create LiteLLM Proxy Cluster in GKE
 ```
