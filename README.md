@@ -36,7 +36,7 @@ bash deploy.sh
 ## Deploy the Deployment and Service of LiteLLM Proxy Cluster
 If you need IP whitelist, modify the loadBalancerSourceRanges in service.yaml
 ```
-kubectl create configmap litellm-config-file --from-file=path/config.yaml
+kubectl create configmap litellm-config-file --from-file=<path>/config.yaml
 kubectl apply -f deployment.yaml
 kubectl apply -f service.yaml
 ```
@@ -65,7 +65,7 @@ sample result:
 1. Upload your new config.yaml to a new configmap
 ```
 kubectl delete configmap litellm-config-file
-kubectl create configmap litellm-config-file --from-file=path/config.yaml
+kubectl create configmap litellm-config-file --from-file=<path>/config.yaml
 ```
 2. Reload the GKE
 ```
