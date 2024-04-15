@@ -62,7 +62,7 @@ sample result:
 ```
 
 ## Update your config.yaml file
-1. Upload your new config.yaml to a new secret version
+1. Upload your new config.yaml to a new configmap
 ```
 kubectl delete configmap litellm-config-file
 kubectl create configmap litellm-config-file --from-file=path/config.yaml
