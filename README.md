@@ -20,7 +20,8 @@ Edit config.yaml
 1. modify "vertex_project" and "vertex_location"
 2. modify "master_key"
 3. modify the model list
-<img width="381" alt="image" src="https://github.com/zhmichael007/litellm-gke/assets/19321027/bdae67d3-12ef-4613-8e3f-42fa0b0214a0">
+<img width="381" alt="image" src="https://github.com/zhmichael007/litellm-gke/assets/19321027/828657c5-36ab-4344-8a15-a3e7ced60da5">
+
 
 
 ## Create LiteLLM Proxy Cluster in GKE
