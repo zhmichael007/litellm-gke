@@ -7,10 +7,6 @@ This repo helps to deploy [LiteLLM](https://github.com/BerriAI/litellm) on GKE w
 3. Build a unified Gemini Proxy platform. Various applications can be directly connected using API Key. There is no need to integrate GCP SA.
 4. If existing open source projects already support OpenAI. With this, they will be compatible with all without the need for major modifications.
 
-```
-git clone https://github.com/zhmichael007/litellm-gke
-cd litellm-gke
-```
 ## Prepare your LiteLLM config yaml file
 ```
 git clone https://github.com/zhmichael007/litellm-gke
