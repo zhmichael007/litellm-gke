@@ -1,5 +1,5 @@
 #!/bin/bash
-PROJECT_ID=zhmichael-demo
+PROJECT_ID=<YOUR PROJECT ID>
 CLUSTER_NAME=litellm-proxy
 REGION=us-central1
 MASTER_ZONE=us-central1-a
