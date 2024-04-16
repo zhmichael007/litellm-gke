@@ -1,4 +1,4 @@
-# LiteLLM on CloudRun
+# LiteLLM on GKE
 This repo helps to deploy [LiteLLM](https://github.com/BerriAI/litellm) on GKE with one step. 
 
 **why need proxy?**
