@@ -33,7 +33,6 @@ NETWORK=default
 MAX_NODES=3
 MACHINE_TYPE=e2-custom-2-1024
 DISK_SIZE="50" 
-KSA_ROLE=roles/aiplatform.user
 KSA_NAME=k8s-sa 
 APP_SA_NAME=litellm-sa
 ```
