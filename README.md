@@ -38,7 +38,7 @@ APP_SA_NAME=litellm-sa
 ```
 bash deploy.sh
 ```
-Attention: Due to cost consideration, this is a zone cluster 
+Attention: taking into account cost, this is a zone cluster 
 ## Deploy the Deployment and Service of LiteLLM Proxy Cluster
 If you need IP whitelist, modify the loadBalancerSourceRanges in service.yaml, this will provide a IP white list in firewall for security
 <img width="471" alt="image" src="https://github.com/zhmichael007/litellm-gke/assets/19321027/29a0bafb-3765-4c92-943c-5a8323a5c316">
