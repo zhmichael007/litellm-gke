@@ -7,7 +7,15 @@ This repo helps to deploy [LiteLLM](https://github.com/BerriAI/litellm) on GKE w
 3. Build a unified Gemini Proxy platform. Various applications can be directly connected using API Key. There is no need to integrate GCP SA.
 4. If existing open source projects already support OpenAI. With this, they will be compatible with all without the need for major modifications.
 
+```
+git clone https://github.com/zhmichael007/litellm-gke
+cd litellm-gke
+```
 ## Prepare your LiteLLM config yaml file
+```
+git clone https://github.com/zhmichael007/litellm-gke
+cd litellm-gke
+```
 Edit config.yaml
 1. modify "vertex_project" and "vertex_location"
 2. modify "master_key"
@@ -34,9 +42,11 @@ bash deploy.sh
 ```
 
 ## Deploy the Deployment and Service of LiteLLM Proxy Cluster
-If you need IP whitelist, modify the loadBalancerSourceRanges in service.yaml
+If you need IP whitelist, modify the loadBalancerSourceRanges in service.yaml, this will provide a IP white list in firewall for security
+<img width="471" alt="image" src="https://github.com/zhmichael007/litellm-gke/assets/19321027/29a0bafb-3765-4c92-943c-5a8323a5c316">
+
 ```
-kubectl create configmap litellm-config-file --from-file=<path>/config.yaml
+kubectl create configmap litellm-config-file --from-file=./config.yaml
 kubectl apply -f deployment.yaml
 kubectl apply -f service.yaml
 ```
@@ -65,7 +75,7 @@ sample result:
 1. Upload your new config.yaml to a new configmap
 ```
 kubectl delete configmap litellm-config-file
-kubectl create configmap litellm-config-file --from-file=<path>/config.yaml
+kubectl create configmap litellm-config-file --from-file=./config.yaml
 ```
 2. Reload the GKE
 ```
