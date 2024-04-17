@@ -5,8 +5,8 @@ REGION=us-central1
 MASTER_ZONE=us-central1-a
 ZONE=(us-central1-a us-central1-b us-central1-c)
 NETWORK=default
-MAX_NODES=3
-MACHINE_TYPE=e2-custom-2-1024
+MAX_NODES=5
+MACHINE_TYPE=e2-custom-2-4096
 DISK_SIZE="50" 
 KSA_ROLE=roles/aiplatform.user
 KSA_NAME=k8s-sa 
@@ -24,42 +24,41 @@ gcloud beta container clusters create $CLUSTER_NAME \
     --workload-pool=$PROJECT_ID.svc.id.goog \
     --addons GcsFuseCsiDriver \
     --num-nodes 1 \
+    --autoscaling-profile optimize-utilization \
     --network=$NETWORK
 
 #get the credentials of the cluster
 gcloud container clusters get-credentials $CLUSTER_NAME --zone=$MASTER_ZONE
 
-for zone in ${ZONE[@]}; do
-    echo "create on demand node pool for zone $zone"
-    gcloud beta container node-pools create "ondemand-$zone" \
-        --zone $MASTER_ZONE \
-        --cluster=$CLUSTER_NAME \
-        --node-locations $zone \
-        --machine-type=$MACHINE_TYPE \
-        --num-nodes 0 \
-        --total-min-nodes=0 \
-        --total-max-nodes=$MAX_NODES \
-        --enable-autoscaling \
-        --disk-size $DISK_SIZE \
-        --disk-type "pd-ssd" \
-        --node-labels=instance-type=ondemand \
-        --workload-metadata=GKE_METADATA
+echo "create on demand node pool for zone $zone"
+gcloud beta container node-pools create "ondemand-pool" \
+    --zone $MASTER_ZONE \
+    --cluster=$CLUSTER_NAME \
+    --node-locations $ZONE \
+    --machine-type=$MACHINE_TYPE \
+    --num-nodes 0 \
+    --total-min-nodes=0 \
+    --total-max-nodes=$MAX_NODES \
+    --enable-autoscaling \
+    --disk-size $DISK_SIZE \
+    --disk-type "pd-ssd" \
+    --node-labels=instance-type=ondemand \
+    --workload-metadata=GKE_METADATA
 
-        echo "create spot node pool for zone $zone"
-        gcloud beta container node-pools create "spot-$zone" \
-            --zone $MASTER_ZONE \
-            --cluster=$CLUSTER_NAME \
-            --node-locations $zone \
-            --machine-type $MACHINE_TYPE \
-            --num-nodes 0 \
-            --total-max-nodes=$MAX_NODES \
-            --enable-autoscaling \
-            --disk-size $DISK_SIZE \
-            --disk-type "pd-ssd" \
-            --node-labels=instance-type=spot \
-            --workload-metadata=GKE_METADATA \
-            --spot
-done
+echo "create spot node pool for zone $zone"
+gcloud beta container node-pools create "spot-pool" \
+    --zone $MASTER_ZONE \
+    --cluster=$CLUSTER_NAME \
+    --node-locations $ZONE \
+    --machine-type $MACHINE_TYPE \
+    --num-nodes 0 \
+    --total-max-nodes=$MAX_NODES \
+    --enable-autoscaling \
+    --disk-size $DISK_SIZE \
+    --disk-type "pd-ssd" \
+    --node-labels=instance-type=spot \
+    --workload-metadata=GKE_METADATA \
+    --spot
 
 #delete default node pool
 gcloud container node-pools delete default-pool --zone=$MASTER_ZONE --cluster=$CLUSTER_NAME --quiet
