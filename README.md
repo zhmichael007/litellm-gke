@@ -45,8 +45,8 @@ If you need IP whitelist, modify the loadBalancerSourceRanges in service.yaml, t
 
 ```
 kubectl create configmap litellm-config-file --from-file=./config.yaml
-kubectl apply -f deployment.yaml
-kubectl apply -f service.yaml
+kubectl apply -f ./deployment.yaml
+kubectl apply -f ./service.yaml
 ```
 
 ## Test
@@ -77,6 +77,6 @@ kubectl create configmap litellm-config-file --from-file=./config.yaml
 ```
 2. Reload the GKE
 ```
-kubectl delete -f deployment.yaml
-kubectl apply -f deployment.yaml
+kubectl delete -f ./deployment.yaml
+kubectl apply -f ./deployment.yaml
 ```
